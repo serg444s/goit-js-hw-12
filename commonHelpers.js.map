@@ -1,1 +1,1 @@
-{"version":3,"file":"commonHelpers.js","sources":["../src/main.js"],"sourcesContent":["const axios = require('axios').default;\n"],"names":[],"mappings":"ssBAAc,QAAQ,OAAO,EAAE"}
+{"version":3,"file":"commonHelpers.js","sources":["../src/main.js"],"sourcesContent":["import iziToast from 'izitoast';\nimport 'izitoast/dist/css/iziToast.min.css';\n\nimport SimpleLightbox from 'simplelightbox';\nimport 'simplelightbox/dist/simple-lightbox.min.css';\n\nconst axios = require('axios').default;\n"],"names":[],"mappings":"0uBAMc,QAAQ,OAAO,EAAE"}
