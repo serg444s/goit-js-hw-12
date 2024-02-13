@@ -1,7 +1,4 @@
-import iziToast from 'izitoast';
-import 'izitoast/dist/css/iziToast.min.css';
+import { refs } from './js/refs';
+import { onFormSubmit } from './js/render-functions';
 
-import SimpleLightbox from 'simplelightbox';
-import 'simplelightbox/dist/simple-lightbox.min.css';
-
-const axios = require('axios').default;
+refs.form.addEventListener('submit', onFormSubmit);
