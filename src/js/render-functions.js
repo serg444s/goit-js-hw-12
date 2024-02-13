@@ -3,19 +3,29 @@ import { onError } from './iziToasts';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
+import { perPage } from './pixabay-api';
+import { MESSAGE } from './iziToasts';
+import { LIMIT } from './iziToasts';
+
 export function makeGalleryItem(response) {
   const result = response.hits.map(makeMarcup).join('');
+  const totalPages = Math.ceil(response.totalHits / perPage);
 
   if (response.hits.length) {
-    refs.galleryList.innerHTML = result;
+    refs.galleryList.insertAdjacentHTML('beforeend', result);
+    refs.btnLoad.classList.remove('hidden');
+
     let lightbox = new SimpleLightbox('.gallery a', {
       captionsData: 'alt',
       captionPosition: 'bottom',
       captionDelay: 250,
     });
     lightbox.refresh();
+    if (page > totalPages) {
+      onError(LIMIT);
+    }
   } else {
-    onError();
+    onError(MESSAGE);
   }
 }
 
