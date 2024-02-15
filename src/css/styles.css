@@ -84,6 +84,7 @@ button {
   color: #fff;
   border: none;
   cursor: pointer;
+  max-width: 200px;
 }
 
 button:hover {
@@ -157,4 +158,8 @@ span {
 
 .hidden {
   display: none;
+}
+
+.btn-load {
+  margin: 20px auto;
 }

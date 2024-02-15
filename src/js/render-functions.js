@@ -3,13 +3,14 @@ import { onError } from './iziToasts';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
-import { perPage } from './pixabay-api';
 import { MESSAGE } from './iziToasts';
 import { LIMIT } from './iziToasts';
 
+export let totalHits;
+
 export function makeGalleryItem(response) {
   const result = response.hits.map(makeMarcup).join('');
-  const totalPages = Math.ceil(response.totalHits / perPage);
+  totalHits = response.totalHits;
 
   if (response.hits.length) {
     refs.galleryList.insertAdjacentHTML('beforeend', result);
@@ -21,9 +22,6 @@ export function makeGalleryItem(response) {
       captionDelay: 250,
     });
     lightbox.refresh();
-    if (page > totalPages) {
-      onError(LIMIT);
-    }
   } else {
     onError(MESSAGE);
   }

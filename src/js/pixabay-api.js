@@ -5,20 +5,23 @@ import { makeGalleryItem } from './render-functions';
 import { onError } from './iziToasts';
 import axios from 'axios';
 import { MESSAGE } from './iziToasts';
+import { totalHits } from './render-functions';
+import { LIMIT } from './iziToasts';
 
+const perPage = 15;
 let page = 1;
-export let perPage = 15;
+let userSearch;
 
 export async function onFormSubmit(event) {
   event.preventDefault();
-  loaderOn();
+  refs.btnLoad.classList.add('hidden');
+
   refs.galleryList.innerHTML = '';
-  const userSearch = event.currentTarget.elements.input.value.trim();
+  page = 1;
+  userSearch = event.target.elements.input.value.trim();
   try {
-    const result = await fetchImg(userSearch);
-    const item = makeGalleryItem(result);
-    page += 1;
-    console.log(page);
+    const response = await fetchImg(userSearch);
+    const item = makeGalleryItem(response);
     return item;
   } catch (error) {
     onError(MESSAGE);
@@ -29,6 +32,7 @@ export async function onFormSubmit(event) {
 }
 
 export async function fetchImg(input) {
+  loaderOn();
   const API_KEY = '42220995-e7901b62efa710cae16c4a0a7';
   axios.defaults.baseURL = 'https://pixabay.com/api/';
   const parameters = `q=${input}&image_type=photo&orientation=horizontal&safesearch=true`;
@@ -42,8 +46,22 @@ export async function fetchImg(input) {
   };
 
   const response = await axios.get(URL, config);
-
   return response.data;
+}
+
+export async function onLoadClick() {
+  page += 1;
+  const totalPages = Math.ceil(totalHits / perPage);
+  if (page > totalPages) {
+    refs.btnLoad.classList.add('hidden');
+
+    onError(LIMIT);
+  } else {
+    const response = await fetchImg(userSearch);
+    const item = makeGalleryItem(response);
+    loaderOff();
+    return item;
+  }
 }
 
 // if (parseInt(data.totalHits) > 0)
