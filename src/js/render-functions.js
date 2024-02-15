@@ -21,6 +21,7 @@ export function makeGalleryItem(response) {
       captionPosition: 'bottom',
       captionDelay: 250,
     });
+
     lightbox.refresh();
   } else {
     onError(MESSAGE);
@@ -44,4 +45,18 @@ export function makeMarcup(image) {
             <div class="modal-element"><p>Downloads</p><span>${image.downloads}</span></div>
         </div>
       </li>`;
+}
+
+// scroll();
+
+export function scroll() {
+  const galleryItem = document.querySelector('.gallery-item');
+  if (galleryItem) {
+    let rect = refs.galleryItem.getBoundingClientRect();
+    console.log(rect.height);
+    window.scrollBy({
+      top: rect.height * 2,
+      behavior: 'smooth',
+    });
+  }
 }

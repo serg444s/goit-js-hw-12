@@ -7,6 +7,7 @@ import axios from 'axios';
 import { MESSAGE } from './iziToasts';
 import { totalHits } from './render-functions';
 import { LIMIT } from './iziToasts';
+import { scroll } from './render-functions';
 
 const perPage = 15;
 let page = 1;
