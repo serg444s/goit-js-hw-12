@@ -7,9 +7,9 @@ import axios from 'axios';
 import { MESSAGE } from './iziToasts';
 import { totalHits } from './render-functions';
 import { LIMIT } from './iziToasts';
-import { scroll } from './render-functions';
+// import { scroll } from './render-functions';
 
-const perPage = 15;
+export const perPage = 15;
 let page = 1;
 let userSearch;
 
@@ -64,6 +64,16 @@ export async function onLoadClick() {
     return item;
   }
 }
+
+// scrollPage();
+// function scrollPage() {
+//   if (page > 1) {
+//     const rect = document
+//       .querySelector('.gallery-item')
+//       .getBoundingClientRect();
+//     window.scrollBy({ top: rect.height * 2, left: 0, behavior: 'smooth' });
+//   }
+// }
 
 // if (parseInt(data.totalHits) > 0)
 //     { console.log(hit.pageURL) }

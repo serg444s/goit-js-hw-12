@@ -2,6 +2,7 @@ import { refs } from './refs';
 import { onError } from './iziToasts';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
+import { perPage } from './pixabay-api';
 
 import { MESSAGE } from './iziToasts';
 import { LIMIT } from './iziToasts';
@@ -11,10 +12,12 @@ export let totalHits;
 export function makeGalleryItem(response) {
   const result = response.hits.map(makeMarcup).join('');
   totalHits = response.totalHits;
-
+  if (totalHits > perPage) {
+    refs.btnLoad.classList.remove('hidden');
+  }
   if (response.hits.length) {
     refs.galleryList.insertAdjacentHTML('beforeend', result);
-    refs.btnLoad.classList.remove('hidden');
+    // refs.btnLoad.classList.remove('hidden');
 
     let lightbox = new SimpleLightbox('.gallery a', {
       captionsData: 'alt',
@@ -47,11 +50,11 @@ export function makeMarcup(image) {
       </li>`;
 }
 
-export function scroll() {
-  const galleryItem = document.querySelector('.gallery-item');
-  if (galleryItem) {
-    let rect = galleryItem.getBoundingClientRect();
-    console.log(rect.height);
-    window.scrollBy(0, rect.height * 2);
-  }
-}
+// export function scroll() {
+//   const galleryItem = document.querySelector('.gallery-item');
+//   if (galleryItem) {
+//     let rect = galleryItem.getBoundingClientRect();
+//     console.log(rect.height);
+//     window.scrollBy(0, rect.height * 2);
+//   }
+// }
