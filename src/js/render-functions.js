@@ -3,9 +3,7 @@ import { onError } from './iziToasts';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 import { perPage } from './pixabay-api';
-
 import { MESSAGE } from './iziToasts';
-import { LIMIT } from './iziToasts';
 
 export let totalHits;
 
