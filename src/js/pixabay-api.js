@@ -7,6 +7,7 @@ import axios from 'axios';
 import { MESSAGE } from './iziToasts';
 import { totalHits } from './render-functions';
 import { LIMIT } from './iziToasts';
+import { CORRECT } from './iziToasts';
 // import { scroll } from './render-functions';
 
 export const perPage = 15;
@@ -20,15 +21,20 @@ export async function onFormSubmit(event) {
   refs.galleryList.innerHTML = '';
   page = 1;
   userSearch = event.target.elements.input.value.trim();
-  try {
-    const response = await fetchImg(userSearch);
-    const item = makeGalleryItem(response);
-    return item;
-  } catch (error) {
-    onError(MESSAGE);
-  } finally {
-    loaderOff();
-    refs.form.reset();
+  if (userSearch) {
+    try {
+      const response = await fetchImg(userSearch);
+      const item = makeGalleryItem(response);
+      return item;
+    } catch (error) {
+      onError(MESSAGE);
+    } finally {
+      loaderOff();
+      refs.form.reset();
+    }
+  } else {
+    refs.form.elements.input.value = '';
+    onError(CORRECT);
   }
 }
 
@@ -55,7 +61,6 @@ export async function onLoadClick() {
   const totalPages = Math.ceil(totalHits / perPage);
   if (page > totalPages) {
     refs.btnLoad.classList.add('hidden');
-
     onError(LIMIT);
   } else {
     const response = await fetchImg(userSearch);

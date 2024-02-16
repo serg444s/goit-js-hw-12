@@ -7,6 +7,8 @@ export const MESSAGE =
 export const LIMIT =
   "We're sorry, but you've reached the end of search results.";
 
+export const CORRECT = 'Please enter correct information.';
+
 export function onError(message) {
   iziToast.error({
     message: message,
