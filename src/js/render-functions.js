@@ -20,11 +20,11 @@ export function makeGalleryItem(response) {
   totalHits = response.totalHits;
   if (totalHits > perPage) {
     refs.btnLoad.classList.remove('hidden');
-    if (response.hits.length) {
-      refs.galleryList.insertAdjacentHTML('beforeend', result);
-    } else {
-      onError(MESSAGE);
-    }
+  }
+  if (response.hits.length) {
+    refs.galleryList.insertAdjacentHTML('beforeend', result);
+  } else {
+    onError(MESSAGE);
   }
 
   lightbox.refresh();
