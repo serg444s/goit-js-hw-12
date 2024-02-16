@@ -46,12 +46,3 @@ export function makeMarcup(image) {
         </div>
       </li>`;
 }
-
-// export function scroll() {
-//   const galleryItem = document.querySelector('.gallery-item');
-//   if (galleryItem) {
-//     let rect = galleryItem.getBoundingClientRect();
-//     console.log(rect.height);
-//     window.scrollBy(0, rect.height * 2);
-//   }
-// }

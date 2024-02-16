@@ -8,7 +8,6 @@ import { MESSAGE } from './iziToasts';
 import { totalHits } from './render-functions';
 import { LIMIT } from './iziToasts';
 import { CORRECT } from './iziToasts';
-// import { scroll } from './render-functions';
 import { lightbox } from './render-functions';
 
 export const perPage = 15;
@@ -66,23 +65,15 @@ export async function onLoadClick() {
   } else {
     const result = await fetchImg(userSearch);
     const element = makeGalleryItem(result);
+    scrollPage();
     loaderOff();
     lightbox.refresh();
     return element;
   }
 }
 
-// scrollPage();
-// function scrollPage() {
-//   if (page > 1) {
-//     const rect = document
-//       .querySelector('.gallery-item')
-//       .getBoundingClientRect();
-//     window.scrollBy({ top: rect.height * 2, left: 0, behavior: 'smooth' });
-//   }
-// }
-
-// if (parseInt(data.totalHits) > 0)
-//     { console.log(hit.pageURL) }
-// else
-//     console.log('No hits');
+function scrollPage() {
+  const rect = refs.galleryList.firstElementChild.getBoundingClientRect();
+  const size = rect.height * 2;
+  window.scrollBy({ top: size, left: 0, behavior: 'smooth' });
+}
