@@ -47,16 +47,11 @@ export function makeMarcup(image) {
       </li>`;
 }
 
-// scroll();
-
 export function scroll() {
   const galleryItem = document.querySelector('.gallery-item');
   if (galleryItem) {
-    let rect = refs.galleryItem.getBoundingClientRect();
+    let rect = galleryItem.getBoundingClientRect();
     console.log(rect.height);
-    window.scrollBy({
-      top: rect.height * 2,
-      behavior: 'smooth',
-    });
+    window.scrollBy(0, rect.height * 2);
   }
 }
