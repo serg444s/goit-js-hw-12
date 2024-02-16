@@ -9,6 +9,7 @@ import { totalHits } from './render-functions';
 import { LIMIT } from './iziToasts';
 import { CORRECT } from './iziToasts';
 // import { scroll } from './render-functions';
+import { lightbox } from './render-functions';
 
 export const perPage = 15;
 let page = 1;
@@ -63,10 +64,11 @@ export async function onLoadClick() {
     refs.btnLoad.classList.add('hidden');
     onError(LIMIT);
   } else {
-    const response = await fetchImg(userSearch);
-    const item = makeGalleryItem(response);
+    const result = await fetchImg(userSearch);
+    const element = makeGalleryItem(result);
     loaderOff();
-    return item;
+    lightbox.refresh();
+    return element;
   }
 }
 

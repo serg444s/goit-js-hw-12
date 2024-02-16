@@ -9,26 +9,25 @@ import { LIMIT } from './iziToasts';
 
 export let totalHits;
 
+export let lightbox = new SimpleLightbox('.gallery a', {
+  captionsData: 'alt',
+  captionPosition: 'bottom',
+  captionDelay: 250,
+});
+
 export function makeGalleryItem(response) {
   const result = response.hits.map(makeMarcup).join('');
   totalHits = response.totalHits;
   if (totalHits > perPage) {
     refs.btnLoad.classList.remove('hidden');
+    if (response.hits.length) {
+      refs.galleryList.insertAdjacentHTML('beforeend', result);
+    } else {
+      onError(MESSAGE);
+    }
   }
-  if (response.hits.length) {
-    refs.galleryList.insertAdjacentHTML('beforeend', result);
-    // refs.btnLoad.classList.remove('hidden');
 
-    let lightbox = new SimpleLightbox('.gallery a', {
-      captionsData: 'alt',
-      captionPosition: 'bottom',
-      captionDelay: 250,
-    });
-
-    lightbox.refresh();
-  } else {
-    onError(MESSAGE);
-  }
+  lightbox.refresh();
 }
 
 export function makeMarcup(image) {
