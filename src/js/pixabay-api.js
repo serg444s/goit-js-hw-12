@@ -12,7 +12,7 @@ import { CORRECT } from './iziToasts';
 import { lightbox } from './render-functions';
 
 export const perPage = 15;
-let page = 1;
+let page;
 let userSearch;
 
 export async function onFormSubmit(event) {
@@ -60,7 +60,7 @@ export async function fetchImg(input) {
 export async function onLoadClick() {
   page += 1;
   const totalPages = Math.ceil(totalHits / perPage);
-  if (page > totalPages) {
+  if (page === totalPages) {
     refs.btnLoad.classList.add('hidden');
     onError(LIMIT);
   } else {
